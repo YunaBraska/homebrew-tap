@@ -1,6 +1,6 @@
 cask "sentrio" do
-  version "0.0.0"
-  sha256 "0000000000000000000000000000000000000000000000000000000000000000"
+  version "2026.02.0532247"
+  sha256 "f7c38ec76428765a22b0ef073e47af2b395a23971629a565b768ed39cfd50d63"
 
   url "https://github.com/YunaBraska/Sentrio/releases/download/#{version}/Sentrio-#{version}.zip",
       verified: "github.com/YunaBraska/Sentrio/"
