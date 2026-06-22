@@ -10,7 +10,7 @@ cask "podlord" do
   desc "Desktop Kubernetes control center"
   homepage "https://github.com/YunaBraska/podlord"
 
-  depends_on macos: ">= :monterey"
+  depends_on macos: :monterey
 
   app "Podlord.app"
 end
