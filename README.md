@@ -6,6 +6,7 @@ This repository is a Homebrew tap for projects under `YunaBraska`.
 
 ```bash
 brew tap yunabraska/tap
+brew install --cask podlord
 brew install --cask sentrio
 ```
 
