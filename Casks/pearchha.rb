@@ -1,6 +1,6 @@
 cask "pearchha" do
   version "2026.7.11"
-  sha256 "98617fcc58efc27ecbaa374e1901f75030b229d113e2f35b00f79945d51b65f8"
+  sha256 "5c03d3d5914e063f54c2adbdda0818b405ed57f8bf0512b709f6b2f7bd97a046"
 
   url "https://github.com/YunaBraska/pearch_ha/releases/download/#{version}/PearchHA-#{version}.zip",
       verified: "github.com/YunaBraska/pearch_ha/"
