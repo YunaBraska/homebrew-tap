@@ -12,4 +12,9 @@ brew upgrade yunabraska/tap/podlord
 brew install --cask sentrio
 ```
 
-Casks in this tap are updated automatically from the upstream GitHub Releases.
+Casks and formulae are updated automatically from public upstream GitHub Releases.
+
+Add one `# yuna-release: owner/repository` marker and one
+`# yuna-release-asset: name-{version}.zip` marker for each platform asset. The
+daily workflow downloads every declared asset from the latest stable release,
+updates its version, URL, and SHA-256, then opens one `bot/maintenance-*` PR.
