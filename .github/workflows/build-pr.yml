@@ -23,14 +23,14 @@ jobs:
       - name: "🧑‍💻 Checkout"
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
         with:
+          fetch-depth: 0
           ref: ${{ inputs.ref || github.sha }}
 
       - name: "🍺 Audit"
         shell: sh
         run: |
           set -eu
-          for formula in Casks/*.rb Formula/*.rb; do
-            test -f "${formula}" || continue
+          git diff --name-only origin/main...HEAD -- Casks Formula | while IFS= read -r formula; do
             case "${formula}" in
               Casks/*)
                 brew style "${formula}"
