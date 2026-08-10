@@ -88,10 +88,14 @@ jobs:
                   active = marker == asset_template
                 }
                 active && /^[[:space:]]*url "/ && !url_written {
-                  indent = substr($0, 1, match($0, /[^[:space:]]/) - 1)
-                  suffix = $0
-                  sub(/^[^"]*"[^"]*"/, "", suffix)
-                  print indent "url \"" url "\"" suffix
+                  if (index($0, "#{version}") == 0) {
+                    indent = substr($0, 1, match($0, /[^[:space:]]/) - 1)
+                    suffix = $0
+                    sub(/^[^"]*"[^"]*"/, "", suffix)
+                    print indent "url \"" url "\"" suffix
+                  } else {
+                    print
+                  }
                   url_written = 1
                   next
                 }
