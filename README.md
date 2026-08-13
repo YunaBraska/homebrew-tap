@@ -16,10 +16,10 @@ Casks and formulae are updated automatically from public upstream GitHub Release
 
 Add one `# yuna-release: owner/repository` marker and one
 `# yuna-release-asset: name-{version}.zip` marker for each platform asset. The
-central workflow downloads every declared asset from the latest stable release,
+tap workflow downloads every declared asset from the latest stable release,
 updates its version, URL, and SHA-256, then opens one `bot/maintenance-*` PR.
-The pull-request workflow validates that branch; central weekly maintenance
+It dispatches formula CI for that exact branch commit; central weekly maintenance
 merges it when green.
 
-This repository deliberately has no update scheduler and no maintenance token.
+The updater uses this repository's `GITHUB_TOKEN`; no maintenance token is needed.
 See [automation ownership](https://github.com/YunaBraska/YunaBraska/blob/main/AUTOMATION.md).
