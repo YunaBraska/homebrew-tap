@@ -22,6 +22,7 @@ jobs:
     runs-on: macos-latest
     timeout-minutes: 15
     permissions:
+      actions: write
       contents: write
       pull-requests: write
     steps:
