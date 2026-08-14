@@ -1,4 +1,7 @@
 cask "podlord" do
+  # yuna-release: YunaBraska/podlord
+  # yuna-release-asset: podlord-macos-arm64.zip
+  # yuna-release-asset: podlord-macos-x64.zip
   arch arm: "arm64", intel: "x64"
 
   version "2026.6.20"

@@ -21,5 +21,9 @@ updates its version, URL, and SHA-256, then opens one `bot/maintenance-*` PR.
 It dispatches formula CI for that exact branch commit; central weekly maintenance
 merges it when green.
 
+An architecture-specific cask keeps Homebrew's normal `arch` and dual
+`sha256 arm:` / `intel:` stanza. Its markers name the ARM64 and x64 release
+assets; the updater maps those names to the corresponding checksum.
+
 The updater uses this repository's `GITHUB_TOKEN`; no maintenance token is needed.
 See [automation ownership](https://github.com/YunaBraska/YunaBraska/blob/main/AUTOMATION.md).
