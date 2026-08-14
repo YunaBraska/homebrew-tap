@@ -46,6 +46,7 @@ jobs:
           mkdir -p "${assets_dir}"
 
           if [ "${dry_run}" = 'false' ]; then
+            git fetch origin main
             if git ls-remote --exit-code --heads origin "${branch}" >/dev/null 2>&1; then
               git fetch origin "refs/heads/${branch}:refs/remotes/origin/${branch}"
               git switch --track -c "${branch}" "origin/${branch}"
@@ -54,6 +55,7 @@ jobs:
             fi
             git config user.name 'Kira Bot'
             git config user.email 'kira@noreply.github.com'
+            git merge --no-edit origin/main
           fi
 
           find Casks Formula -type f -name '*.rb' 2>/dev/null | sort | while IFS= read -r formula; do
@@ -83,37 +85,82 @@ jobs:
               test -f "${asset_file}"
               sha256=$(shasum -a 256 "${asset_file}" | awk '{print $1}')
               url="https://github.com/${repository}/releases/download/${version}/${asset}"
-              awk -v asset_template="${asset_template}" -v sha256="${sha256}" -v url="${url}" '
-                /^[[:space:]]*# yuna-release-asset:[[:space:]]*/ {
-                  marker = $0
-                  sub(/^[[:space:]]*# yuna-release-asset:[[:space:]]*/, "", marker)
-                  active = marker == asset_template
-                }
-                active && /^[[:space:]]*url "/ && !url_written {
-                  if (index($0, "#{version}") == 0) {
-                    indent = substr($0, 1, match($0, /[^[:space:]]/) - 1)
+              if grep -q '^[[:space:]]*sha256[[:space:]]*arm:' "${next}"; then
+                case "${asset}" in
+                  *-arm64.*)
+                    cask_arch='arm'
+                    ;;
+                  *-x64.*|*-x86_64.*|*-amd64.*)
+                    cask_arch='intel'
+                    ;;
+                  *)
+                    echo "${formula}: cannot map ${asset} to a cask architecture." >&2
+                    exit 1
+                    ;;
+                esac
+                if ! grep -q '#{version}' "${next}"; then
+                  echo "${formula}: architecture-specific casks require a version URL." >&2
+                  exit 1
+                fi
+                awk -v cask_arch="${cask_arch}" -v sha256="${sha256}" '
+                  cask_arch == "arm" && /^[[:space:]]*sha256[[:space:]]+arm:/ {
+                    prefix = $0
+                    sub(/".*/, "", prefix)
                     suffix = $0
                     sub(/^[^"]*"[^"]*"/, "", suffix)
-                    print indent "url \"" url "\"" suffix
-                  } else {
-                    print
+                    print prefix "\"" sha256 "\"" suffix
+                    written = 1
+                    next
                   }
-                  url_written = 1
-                  next
-                }
-                active && /^[[:space:]]*sha256 "/ && !sha256_written {
-                  indent = substr($0, 1, match($0, /[^[:space:]]/) - 1)
-                  print indent "sha256 \"" sha256 "\""
-                  sha256_written = 1
-                  next
-                }
-                { print }
-                END {
-                  if (!url_written || !sha256_written) {
-                    exit 1
+                  cask_arch == "intel" && /^[[:space:]]*(intel|x86_64):/ {
+                    prefix = $0
+                    sub(/".*/, "", prefix)
+                    suffix = $0
+                    sub(/^[^"]*"[^"]*"/, "", suffix)
+                    print prefix "\"" sha256 "\"" suffix
+                    written = 1
+                    next
                   }
-                }
-              ' "${next}" > "${next}.asset"
+                  { print }
+                  END {
+                    if (!written) {
+                      exit 1
+                    }
+                  }
+                ' "${next}" > "${next}.asset"
+              else
+                awk -v asset_template="${asset_template}" -v sha256="${sha256}" -v url="${url}" '
+                  /^[[:space:]]*# yuna-release-asset:[[:space:]]*/ {
+                    marker = $0
+                    sub(/^[[:space:]]*# yuna-release-asset:[[:space:]]*/, "", marker)
+                    active = marker == asset_template
+                  }
+                  active && /^[[:space:]]*url "/ && !url_written {
+                    if (index($0, "#{version}") == 0) {
+                      indent = substr($0, 1, match($0, /[^[:space:]]/) - 1)
+                      suffix = $0
+                      sub(/^[^"]*"[^"]*"/, "", suffix)
+                      print indent "url \"" url "\"" suffix
+                    } else {
+                      print
+                    }
+                    url_written = 1
+                    next
+                  }
+                  active && /^[[:space:]]*sha256 "/ && !sha256_written {
+                    indent = substr($0, 1, match($0, /[^[:space:]]/) - 1)
+                    print indent "sha256 \"" sha256 "\""
+                    sha256_written = 1
+                    next
+                  }
+                  { print }
+                  END {
+                    if (!url_written || !sha256_written) {
+                      exit 1
+                    }
+                  }
+                ' "${next}" > "${next}.asset"
+              fi
               mv "${next}.asset" "${next}"
             done
 
