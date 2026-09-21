@@ -1,19 +1,19 @@
 class Podlord < Formula
   desc "Desktop Kubernetes control center"
   homepage "https://github.com/YunaBraska/podlord"
-  version "2026.9.7"
+  version "2026.9.21"
 
   if OS.linux? && Hardware::CPU.intel?
     # yuna-release: YunaBraska/podlord
     # yuna-release-asset: podlord-linux-x64.tar.gz
     url "https://github.com/YunaBraska/podlord/releases/download/#{version}/podlord-linux-x64.tar.gz"
-    sha256 "f4aa998deb028b6055453fd367870c5cb257b659b01f19d575ae802e875c6339"
+    sha256 "5781963d35651822b7cd9f4454233a9a8fa464d9e642ceb4bedf151e9677b4c5"
   end
 
   if OS.linux? && Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
     # yuna-release-asset: podlord-linux-arm64.tar.gz
     url "https://github.com/YunaBraska/podlord/releases/download/#{version}/podlord-linux-arm64.tar.gz"
-    sha256 "ef62e7a3715d10377c27cb406013d4728704f57cdb59baee5031b874af659797"
+    sha256 "97c4d4e16427ad5716677899f3df9f67aa3efdf4a087e41fb46e8db853b32f36"
   end
 
   license "MIT"
