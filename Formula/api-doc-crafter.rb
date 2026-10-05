@@ -1,7 +1,7 @@
 class ApiDocCrafter < Formula
   desc "Merge, clean, filter, and render OpenAPI documentation"
   homepage "https://github.com/YunaBraska/api-doc-crafter"
-  version "2026.9.21"
+  version "2026.9.28"
   license "MIT"
 
   on_macos do
@@ -9,13 +9,13 @@ class ApiDocCrafter < Formula
       # yuna-release: YunaBraska/api-doc-crafter
       # yuna-release-asset: api-doc-crafter-macos-arm64-{version}.native
       url "https://github.com/YunaBraska/api-doc-crafter/releases/download/#{version}/api-doc-crafter-macos-arm64-#{version}.native"
-      sha256 "c471a2eafdd259d9bc3e8f3879c5e182f8616d3b199e4cf25c624cd484d25634"
+      sha256 "f027e7a959648f2f9d3fdd4ce59b3b8bbc862416405c9b5e5ec64e585eb1d24f"
     end
 
     on_intel do
       # yuna-release-asset: api-doc-crafter-macos-x64-{version}.native
       url "https://github.com/YunaBraska/api-doc-crafter/releases/download/#{version}/api-doc-crafter-macos-x64-#{version}.native"
-      sha256 "2f593ac26d8b2b06f2a26b0c15bd70be877769c4a808a15346f713dcaeb65510"
+      sha256 "6e19c224c363e01c78bbfe7d271fd0f66a2e400f014650afcbcd014297eeb4ef"
     end
   end
 
@@ -23,13 +23,13 @@ class ApiDocCrafter < Formula
     on_arm do
       # yuna-release-asset: api-doc-crafter-linux-arm64-{version}.native
       url "https://github.com/YunaBraska/api-doc-crafter/releases/download/#{version}/api-doc-crafter-linux-arm64-#{version}.native"
-      sha256 "ab953d1f73169e7356b5f6b36422fdc3bdb0a8d7badef7a3c1aaabd1da3df510"
+      sha256 "441a0c0bc245cd9111ca8a0d1ff296c5693a10da5fb72f6ca5d417177d100fa6"
     end
 
     on_intel do
       # yuna-release-asset: api-doc-crafter-linux-amd64-{version}.native
       url "https://github.com/YunaBraska/api-doc-crafter/releases/download/#{version}/api-doc-crafter-linux-amd64-#{version}.native"
-      sha256 "a7090d5d0de42b4f6098c32c527857a42913744a1db302e245eab4fa234927d0"
+      sha256 "adca9d0dc900712241cee392754f82b36c908e8ec81a269c553bdc82218aefd7"
     end
   end
 
