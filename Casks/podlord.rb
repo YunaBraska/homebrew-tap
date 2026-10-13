@@ -4,9 +4,9 @@ cask "podlord" do
   # yuna-release-asset: podlord-macos-x64.zip
   arch arm: "arm64", intel: "x64"
 
-  version "2026.9.28"
-  sha256 arm:   "2a28a705fb0f38cb10aad1be61ebad57ff7b3979f8d37453ee3db08bf0ed6aa0",
-         intel: "964c5beee769c933f7932e648368641ff887d53fab6b17ef6bd98884d74df738"
+  version "2026.10.12"
+  sha256 arm:   "150215dd378960343b41a66ad635d2898b4d3c51ec1a60d1553b69dbd4d536d4",
+         intel: "d97f15a3ba015048a19838544ec35460d2adf89540619c75f507608b1c5c09be"
 
   url "https://github.com/YunaBraska/podlord/releases/download/#{version}/podlord-macos-#{arch}.zip"
   name "Podlord"
