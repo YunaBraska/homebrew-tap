@@ -1,8 +1,8 @@
 cask "sentrio" do
   # yuna-release: YunaBraska/Sentrio
-  version "2026.8.17"
+  version "2026.10.24"
   # yuna-release-asset: Sentrio-{version}.zip
-  sha256 "33061bad0ae643df518d821b0a8168dcd60bd9e49a62a07627a607cf04df11b7"
+  sha256 "7d0d3af5b02546221503774a0a20b0173d8fb73a834c4bb390e0beb0ff5f635c"
 
   url "https://github.com/YunaBraska/Sentrio/releases/download/#{version}/Sentrio-#{version}.zip",
       verified: "github.com/YunaBraska/Sentrio/"
