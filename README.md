@@ -9,6 +9,7 @@ brew tap yunabraska/tap
 brew install --cask yunabraska/tap/podlord   # macOS
 brew install yunabraska/tap/podlord          # Linux
 brew upgrade yunabraska/tap/podlord
+brew install --cask yunabraska/tap/squadspeak # macOS
 brew install --cask sentrio
 ```
 
