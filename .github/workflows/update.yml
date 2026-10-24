@@ -216,4 +216,3 @@ jobs:
           else
             gh pr create --base main --head "${branch}" --title 'brew: update releases' --body ''
           fi
-          gh workflow run build-pr.yml --ref "${branch}" -f ref="${branch}"
