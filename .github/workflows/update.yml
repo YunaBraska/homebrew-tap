@@ -80,11 +80,11 @@ jobs:
 
             for asset_template in ${assets}; do
               asset=$(printf '%s\n' "${asset_template}" | sed "s/{version}/${version}/g")
-              gh release download "${version}" --repo "${repository}" --pattern "${asset}" --dir "${assets_dir}" --clobber
+              url="https://github.com/${repository}/releases/download/${version}/${asset}"
               asset_file="${assets_dir}/${asset}"
+              curl --fail --location --output "${asset_file}" "${url}"
               test -f "${asset_file}"
               sha256=$(shasum -a 256 "${asset_file}" | awk '{print $1}')
-              url="https://github.com/${repository}/releases/download/${version}/${asset}"
               if grep -q '^[[:space:]]*sha256[[:space:]]*arm:' "${next}"; then
                 case "${asset}" in
                   *-arm64.*)
