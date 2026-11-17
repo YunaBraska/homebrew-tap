@@ -1,8 +1,8 @@
 cask "pearchha" do
   # yuna-release: YunaBraska/pearch_ha
-  version "2026.11.11"
+  version "2026.11.16"
   # yuna-release-asset: PearchHA-{version}.zip
-  sha256 "71ccca37eec07539b30562d6577b11591c5e3910fd95e2c44dc3617aedd466e7"
+  sha256 "7120ab013899dc7aadacc1cf0b5b2659d7210852e0b914d279d93780fef97411"
 
   url "https://github.com/YunaBraska/pearch_ha/releases/download/#{version}/PearchHA-#{version}.zip",
       verified: "github.com/YunaBraska/pearch_ha/"
